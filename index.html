@@ -14,6 +14,30 @@ body {
   color:white;
 }
 
+/* START SCREEN */
+.startScreen {
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:black;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:999;
+}
+
+.startBtn {
+  padding:15px 30px;
+  font-size:18px;
+  border:none;
+  border-radius:30px;
+  background:#ff4d6d;
+  color:white;
+  cursor:pointer;
+}
+
+/* TEXT */
 .center {
   position:absolute;
   top:50%;
@@ -24,13 +48,14 @@ body {
 }
 
 .text {
-  font-size:clamp(20px,5vw,36px);
+  font-size:clamp(22px,5vw,36px);
   opacity:0;
-  transition:1s;
+  transition:1.2s;
 }
 
 .show { opacity:1; }
 
+/* IMAGES */
 img {
   position:absolute;
   width:clamp(120px,25vw,260px);
@@ -43,20 +68,19 @@ img {
 #juyeon { right:5%; top:60%; transform:translateY(-50%); }
 #christian { left:50%; top:70%; transform:translate(-50%,-50%); }
 
-.blur { filter:blur(10px); }
-
+/* EFFECT */
 .glow {
   box-shadow:0 0 40px #ff4d6d;
   transform:scale(1.1);
 }
 
-.zoom {
-  animation: zoomIn 1.5s forwards;
+.break {
+  animation: breakAnim 1s forwards;
 }
 
-@keyframes zoomIn {
-  from { transform:translate(-50%,-50%) scale(0.7); }
-  to { transform:translate(-50%,-50%) scale(1); }
+@keyframes breakAnim {
+  0% { transform:scale(1); opacity:1; }
+  100% { transform:scale(0); opacity:0; }
 }
 
 .flash {
@@ -67,37 +91,7 @@ img {
   opacity:0;
 }
 
-.break {
-  animation: breakAnim 0.6s forwards;
-}
-
-@keyframes breakAnim {
-  0% { transform:scale(1); opacity:1; }
-  50% { transform:scale(1.2) rotate(5deg); }
-  100% { transform:scale(0); opacity:0; }
-}
-
-.startScreen {
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:black;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  z-index:999;
-  font-size:22px;
-  text-align:center;
-  cursor:pointer;
-  animation: fadeIn 1s;
-}
-
-@keyframes fadeIn {
-  from { opacity:0; }
-  to { opacity:1; }
-}
-
+/* HEART */
 .heart {
   position:absolute;
   width:10px;
@@ -124,30 +118,45 @@ img {
 
 <body>
 
-<!-- START SCREEN -->
+<!-- START -->
 <div id="startScreen" class="startScreen">
-  💖 Tap untuk memulai kisah 💖
-  <small style="margin-top:10px; opacity:0.6;">musik akan diputar</small>
+  <h2>💖 Sebuah Kisah Akan Dimulai 💖</h2>
+  <button class="startBtn" onclick="startExperience()">Mulai</button>
 </div>
 
 <div id="flash" class="flash"></div>
 
-<!-- TEXT STORY -->
+<!-- STORY -->
 <div id="t1" class="center text">Kheyra ❤️ Juyeon</div>
-<div id="t2" class="center text">Semua dimulai dengan indah...</div>
-<div id="t3" class="center text">Hari penuh tawa dan bahagia</div>
-<div id="t4" class="center text">Namun... semuanya berubah</div>
-<div id="t5" class="center text">Perasaan mulai memudar</div>
-<div id="t6" class="center text">Dan akhirnya...</div>
-<div id="t7" class="center text">Juyeon pergi 💔</div>
-<div id="t8" class="center text">Kheyra sendirian...</div>
-<div id="t9" class="center text">Dunia terasa kosong</div>
-<div id="t10" class="center text">Hingga suatu hari...</div>
-<div id="t11" class="center text">💥 Christian datang</div>
-<div id="t12" class="center text">Membawa harapan baru</div>
-<div id="t13" class="center text">Mengisi kembali hati yang kosong</div>
-<div id="t14" class="center text">Dan kini...</div>
-<div id="t15" class="center text">Kheyra ❤️ Christian 💖</div>
+<div id="t2" class="center text">Semua dimulai dengan sederhana...</div>
+<div id="t3" class="center text">Percakapan kecil menjadi kebiasaan</div>
+<div id="t4" class="center text">Hari-hari terasa lebih berarti</div>
+<div id="t5" class="center text">Tawa... cerita... kebahagiaan...</div>
+<div id="t6" class="center text">Seolah semuanya akan selalu seperti itu</div>
+
+<div id="t7" class="center text">Namun... perlahan berubah</div>
+<div id="t8" class="center text">Perasaan tidak lagi sama</div>
+<div id="t9" class="center text">Jarak mulai terasa</div>
+<div id="t10" class="center text">Dan komunikasi semakin hilang</div>
+
+<div id="t11" class="center text">Hingga akhirnya...</div>
+<div id="t12" class="center text">Juyeon pergi 💔</div>
+
+<div id="t13" class="center text">Kheyra sendirian...</div>
+<div id="t14" class="center text">Mencoba mengerti semuanya</div>
+<div id="t15" class="center text">Namun hati tetap terasa kosong</div>
+<div id="t16" class="center text">Hari terasa lebih sunyi</div>
+
+<div id="t17" class="center text">Sampai suatu hari...</div>
+
+<div id="t18" class="center text">💥 Christian datang</div>
+<div id="t19" class="center text">Tanpa banyak kata...</div>
+<div id="t20" class="center text">Namun membawa ketenangan</div>
+<div id="t21" class="center text">Perlahan... semuanya berubah</div>
+<div id="t22" class="center text">Senyum itu kembali</div>
+
+<div id="t23" class="center text">Dan kini...</div>
+<div id="t24" class="center text">Kheyra ❤️ Christian 💖</div>
 
 <!-- IMAGES -->
 <img id="kheyra" src="kheyra.jpg">
@@ -161,15 +170,12 @@ img {
 <script>
 const music = document.getElementById("music");
 const flash = document.getElementById("flash");
-const startScreen = document.getElementById("startScreen");
 
-// START EXPERIENCE
-startScreen.addEventListener("click", () => {
-  music.volume = 1;
+function startExperience(){
+  document.getElementById("startScreen").style.display = "none";
   music.play();
-  startScreen.style.display = "none";
   startStory();
-});
+}
 
 function show(id,time){
   setTimeout(()=>document.getElementById(id).classList.add("show"),time);
@@ -182,7 +188,7 @@ function hide(id,time){
 function flashEffect(time){
   setTimeout(()=>{
     flash.style.opacity=1;
-    setTimeout(()=>flash.style.opacity=0,300);
+    setTimeout(()=>flash.style.opacity=0,400);
   },time);
 }
 
@@ -195,7 +201,7 @@ function hearts(){
 
   let pos=window.innerHeight;
   const anim=setInterval(()=>{
-    pos-=4;
+    pos-=3;
     h.style.top=pos+"px";
     if(pos<0){clearInterval(anim);h.remove();}
   },20);
@@ -203,44 +209,73 @@ function hearts(){
 
 function startStory(){
 
-show("t1",500); show("kheyra",500); show("juyeon",500);
-hide("t1",3000);
+let t = 1000;
 
-show("t2",3500); hide("t2",6000);
-show("t3",6500); hide("t3",9000);
+// INTRO (slow)
+show("kheyra", t);
+show("juyeon", t);
 
-show("t4",9500);
-setTimeout(()=>document.getElementById("juyeon").classList.add("break"),10000);
-hide("t4",12000);
+function step(id, dur=5000){
+  show(id, t);
+  hide(id, t + dur);
+  t += dur + 1500;
+}
 
-show("t5",12500); hide("t5",15000);
-show("t6",15500); hide("t6",18000);
+// VERSE
+step("t1", 5000);
+step("t2");
+step("t3");
+step("t4");
+step("t5");
+step("t6");
 
-show("t7",18500); hide("t7",21000);
+// BUILD
+step("t7");
+step("t8");
+step("t9");
+step("t10");
 
-show("t8",21500); hide("t8",24000);
-show("t9",24500); hide("t9",27000);
+// DROP EMOSI
+step("t11");
 
-show("t10",27500); hide("t10",30000);
+show("t12", t);
+setTimeout(()=>document.getElementById("juyeon").classList.add("break"), t+1500);
+hide("t12", t+6000);
+t += 7000;
 
-flashEffect(30500);
-show("t11",31000); show("christian",31000);
-document.getElementById("christian").classList.add("zoom");
-hide("t11",34000);
+// SAD PART
+step("t13");
+step("t14");
+step("t15");
+step("t16");
 
-show("t12",34500); hide("t12",37000);
-show("t13",37500); hide("t13",40000);
+// TRANSISI
+step("t17");
 
-show("t14",40500); hide("t14",43000);
+// CLIMAX (masuk Christian)
+flashEffect(t);
+show("t18", t);
+show("christian", t);
+t += 6000;
 
-show("t15",43500);
+// HEALING
+step("t19");
+step("t20");
+step("t21");
+step("t22");
+
+// ENDING
+step("t23");
+
+show("t24", t);
 
 setTimeout(()=>{
   document.getElementById("kheyra").classList.add("glow");
   document.getElementById("christian").classList.add("glow");
-},44000);
+}, t+1000);
 
-setInterval(hearts,250);
+// hearts
+setInterval(hearts,300);
 
 }
 
