@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Kheyra Story ❤️ ULTIMATE</title>
+
+<style>
+body {
+  margin:0;
+  background:black;
+  overflow:hidden;
+  font-family:sans-serif;
+  color:white;
+}
+
+.center {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  text-align:center;
+}
+
+.text {
+  font-size:32px;
+  opacity:0;
+  transition:1s;
+}
+
+.show { opacity:1; }
+
+img {
+  position:absolute;
+  width:230px;
+  border-radius:15px;
+  opacity:0;
+  transition:1s;
+}
+
+.blur { filter:blur(10px); }
+
+.glow {
+  box-shadow:0 0 40px #ff4d6d;
+  transform:scale(1.05);
+}
+
+.flash {
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:white;
+  opacity:0;
+}
+
+.break {
+  animation: breakAnim 0.6s forwards;
+}
+
+@keyframes breakAnim {
+  0% { transform:scale(1); opacity:1; }
+  50% { transform:scale(1.2) rotate(5deg); }
+  100% { transform:scale(0); opacity:0; }
+}
+
+.zoom {
+  animation: zoomIn 2s forwards;
+}
+
+@keyframes zoomIn {
+  from { transform:scale(0.8); }
+  to { transform:scale(1); }
+}
+
+.heart {
+  position:absolute;
+  width:12px;
+  height:12px;
+  background:red;
+  transform:rotate(45deg);
+}
+
+.heart::before,
+.heart::after {
+  content:"";
+  position:absolute;
+  width:12px;
+  height:12px;
+  background:red;
+  border-radius:50%;
+}
+
+.heart::before { top:-6px; }
+.heart::after { left:-6px; }
+
+</style>
+</head>
+
+<body>
+
+<div id="flash" class="flash"></div>
+
+<!-- TEXT -->
+<div id="t1" class="center text">Kheyra ❤️ Juyeon</div>
+<div id="t2" class="center text">Semua terasa sempurna...</div>
+<div id="t3" class="center text">Namun... semuanya hancur</div>
+<div id="t4" class="center text">Juyeon pergi 💔</div>
+<div id="t5" class="center text">Kheyra sendirian...</div>
+<div id="t6" class="center text">💥 Christian datang</div>
+<div id="t7" class="center text">Dia hadir bukan untuk menggantikan...</div>
+<div id="t8" class="center text">Tapi untuk menetap 💖</div>
+<div id="t9" class="center text">Kheyra ❤️ Christian</div>
+
+<!-- FOTO -->
+<img id="kheyra" src="kheyra.jpg" style="left:20%;">
+<img id="juyeon" src="juyeon.jpg" style="right:20%;">
+<img id="christian" src="christian.jpg" style="left:40%;">
+
+<audio id="music" loop preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const music = document.getElementById("music");
+const flash = document.getElementById("flash");
+
+// start music (HP safe)
+document.body.addEventListener("click", ()=>{
+  music.play();
+}, { once:true });
+
+function show(id,time){
+  setTimeout(()=>document.getElementById(id).classList.add("show"),time);
+}
+
+function hide(id,time){
+  setTimeout(()=>document.getElementById(id).classList.remove("show"),time);
+}
+
+function flashEffect(time){
+  setTimeout(()=>{
+    flash.style.opacity=1;
+    setTimeout(()=>flash.style.opacity=0,300);
+  },time);
+}
+
+function hearts(){
+  const h=document.createElement("div");
+  h.className="heart";
+  h.style.left=Math.random()*window.innerWidth+"px";
+  h.style.top=window.innerHeight+"px";
+  document.body.appendChild(h);
+
+  let pos=window.innerHeight;
+  const anim=setInterval(()=>{
+    pos-=5;
+    h.style.top=pos+"px";
+    if(pos<0){clearInterval(anim);h.remove();}
+  },20);
+}
+
+// TIMELINE ULTRA CINEMATIC 🔥
+
+show("t1",500);
+show("kheyra",500);
+show("juyeon",500);
+
+hide("t1",3000);
+
+show("t2",3500);
+hide("t2",6000);
+
+show("t3",6500);
+setTimeout(()=>{
+  document.getElementById("juyeon").classList.add("break");
+},7000);
+hide("t3",9000);
+
+show("t4",9500);
+hide("t4",12000);
+
+show("t5",12500);
+hide("t5",15000);
+
+flashEffect(15500);
+show("t6",16000);
+show("christian",16000);
+document.getElementById("christian").classList.add("zoom");
+hide("t6",18500);
+
+show("t7",19000);
+hide("t7",22000);
+
+show("t8",22500);
+hide("t8",25500);
+
+show("t9",26000);
+
+setTimeout(()=>{
+  document.getElementById("kheyra").classList.add("glow");
+  document.getElementById("christian").classList.add("glow");
+},27000);
+
+setInterval(hearts,200);
+
+</script>
+
+</body>
+</html>
