@@ -14,7 +14,7 @@ body {
   color:white;
 }
 
-/* START SCREEN */
+/* START */
 .startScreen {
   position:fixed;
   width:100%;
@@ -29,11 +29,11 @@ body {
 
 .startBtn {
   padding:15px 30px;
-  font-size:18px;
   border:none;
   border-radius:30px;
   background:#ff4d6d;
   color:white;
+  font-size:18px;
   cursor:pointer;
 }
 
@@ -50,12 +50,12 @@ body {
 .text {
   font-size:clamp(22px,5vw,36px);
   opacity:0;
-  transition:1.2s;
+  transition:1s;
 }
 
 .show { opacity:1; }
 
-/* IMAGES */
+/* IMAGE */
 img {
   position:absolute;
   width:clamp(120px,25vw,260px);
@@ -66,7 +66,7 @@ img {
 
 #kheyra { left:5%; top:60%; transform:translateY(-50%); }
 #juyeon { right:5%; top:60%; transform:translateY(-50%); }
-#christian { left:50%; top:70%; transform:translate(-50%,-50%); }
+#christian { right:5%; top:60%; transform:translateY(-50%); }
 
 /* EFFECT */
 .glow {
@@ -74,15 +74,27 @@ img {
   transform:scale(1.1);
 }
 
-.break {
-  animation: breakAnim 1s forwards;
+/* DORONG KELUAR */
+.pushOut {
+  animation: pushOut 1s forwards;
 }
 
-@keyframes breakAnim {
-  0% { transform:scale(1); opacity:1; }
-  100% { transform:scale(0); opacity:0; }
+@keyframes pushOut {
+  from { transform:translateY(-50%) translateX(0); opacity:1; }
+  to { transform:translateY(-50%) translateX(200px); opacity:0; }
 }
 
+/* MASUK */
+.enterRight {
+  animation: enterRight 1s forwards;
+}
+
+@keyframes enterRight {
+  from { transform:translateY(-50%) translateX(200px); opacity:0; }
+  to { transform:translateY(-50%) translateX(0); opacity:1; }
+}
+
+/* FLASH */
 .flash {
   position:absolute;
   width:100%;
@@ -118,7 +130,6 @@ img {
 
 <body>
 
-<!-- START -->
 <div id="startScreen" class="startScreen">
   <h2>💖 Sebuah Kisah Akan Dimulai 💖</h2>
   <button class="startBtn" onclick="startExperience()">Mulai</button>
@@ -126,37 +137,8 @@ img {
 
 <div id="flash" class="flash"></div>
 
-<!-- STORY -->
-<div id="t1" class="center text">Kheyra ❤️ Juyeon</div>
-<div id="t2" class="center text">Semua dimulai dengan sederhana...</div>
-<div id="t3" class="center text">Percakapan kecil menjadi kebiasaan</div>
-<div id="t4" class="center text">Hari-hari terasa lebih berarti</div>
-<div id="t5" class="center text">Tawa... cerita... kebahagiaan...</div>
-<div id="t6" class="center text">Seolah semuanya akan selalu seperti itu</div>
-
-<div id="t7" class="center text">Namun... perlahan berubah</div>
-<div id="t8" class="center text">Perasaan tidak lagi sama</div>
-<div id="t9" class="center text">Jarak mulai terasa</div>
-<div id="t10" class="center text">Dan komunikasi semakin hilang</div>
-
-<div id="t11" class="center text">Hingga akhirnya...</div>
-<div id="t12" class="center text">Juyeon pergi 💔</div>
-
-<div id="t13" class="center text">Kheyra sendirian...</div>
-<div id="t14" class="center text">Mencoba mengerti semuanya</div>
-<div id="t15" class="center text">Namun hati tetap terasa kosong</div>
-<div id="t16" class="center text">Hari terasa lebih sunyi</div>
-
-<div id="t17" class="center text">Sampai suatu hari...</div>
-
-<div id="t18" class="center text">💥 Christian datang</div>
-<div id="t19" class="center text">Tanpa banyak kata...</div>
-<div id="t20" class="center text">Namun membawa ketenangan</div>
-<div id="t21" class="center text">Perlahan... semuanya berubah</div>
-<div id="t22" class="center text">Senyum itu kembali</div>
-
-<div id="t23" class="center text">Dan kini...</div>
-<div id="t24" class="center text">Kheyra ❤️ Christian 💖</div>
+<!-- TEXT -->
+<div id="text" class="center text"></div>
 
 <!-- IMAGES -->
 <img id="kheyra" src="kheyra.jpg">
@@ -170,6 +152,7 @@ img {
 <script>
 const music = document.getElementById("music");
 const flash = document.getElementById("flash");
+const textEl = document.getElementById("text");
 
 function startExperience(){
   document.getElementById("startScreen").style.display = "none";
@@ -177,19 +160,17 @@ function startExperience(){
   startStory();
 }
 
-function show(id,time){
-  setTimeout(()=>document.getElementById(id).classList.add("show"),time);
-}
-
-function hide(id,time){
-  setTimeout(()=>document.getElementById(id).classList.remove("show"),time);
-}
-
-function flashEffect(time){
+function setText(content){
+  textEl.classList.remove("show");
   setTimeout(()=>{
-    flash.style.opacity=1;
-    setTimeout(()=>flash.style.opacity=0,400);
-  },time);
+    textEl.innerHTML = content;
+    textEl.classList.add("show");
+  },300);
+}
+
+function flashEffect(){
+  flash.style.opacity=1;
+  setTimeout(()=>flash.style.opacity=0,300);
 }
 
 function hearts(){
@@ -209,70 +190,62 @@ function hearts(){
 
 function startStory(){
 
-let t = 1000;
+let t = 0;
 
-// INTRO (slow)
-show("kheyra", t);
-show("juyeon", t);
+// tampil awal
+setTimeout(()=>{
+  document.getElementById("kheyra").style.opacity = 1;
+  document.getElementById("juyeon").style.opacity = 1;
+},500);
 
-function step(id, dur=5000){
-  show(id, t);
-  hide(id, t + dur);
-  t += dur + 1500;
+function step(txt, delay=4000){
+  setTimeout(()=>setText(txt), t);
+  t += delay;
 }
 
-// VERSE
-step("t1", 5000);
-step("t2");
-step("t3");
-step("t4");
-step("t5");
-step("t6");
+// STORY
+step("Kheyra ❤️ Juyeon");
+step("Semua terasa sempurna...");
+step("Hari penuh tawa...");
+step("Namun semuanya berubah...");
+step("Perasaan tidak lagi sama...");
+step("Dan akhirnya...");
 
-// BUILD
-step("t7");
-step("t8");
-step("t9");
-step("t10");
+// PUSH EFFECT 💥
+setTimeout(()=>{
+  setText("Juyeon pergi 💔");
+  document.getElementById("juyeon").classList.add("pushOut");
+}, t);
 
-// DROP EMOSI
-step("t11");
+t += 5000;
 
-show("t12", t);
-setTimeout(()=>document.getElementById("juyeon").classList.add("break"), t+1500);
-hide("t12", t+6000);
-t += 7000;
+// SENDIRI
+step("Kheyra sendirian...");
+step("Dunia terasa kosong...");
+step("Hingga suatu hari...");
 
-// SAD PART
-step("t13");
-step("t14");
-step("t15");
-step("t16");
+// CHRISTIAN MASUK 💥
+setTimeout(()=>{
+  flashEffect();
+  setText("💥 Christian datang");
 
-// TRANSISI
-step("t17");
+  const c = document.getElementById("christian");
+  c.style.opacity = 1;
+  c.classList.add("enterRight");
+}, t);
 
-// CLIMAX (masuk Christian)
-flashEffect(t);
-show("t18", t);
-show("christian", t);
-t += 6000;
-
-// HEALING
-step("t19");
-step("t20");
-step("t21");
-step("t22");
+t += 5000;
 
 // ENDING
-step("t23");
+step("Membawa harapan baru...");
+step("Dan kini...");
+step("Kheyra ❤️ Christian 💖", 5000);
 
-show("t24", t);
-
+// glow
 setTimeout(()=>{
   document.getElementById("kheyra").classList.add("glow");
   document.getElementById("christian").classList.add("glow");
-}, t+1000);
+}, t);
 
 // hearts
 setInterval(hearts,300);
